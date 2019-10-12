@@ -3,14 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center bg-info"  >Pengumuman</div>
-                <div class="card-body">
-                <a href="{!! route('pengumuman.create')!!}" class="btn btn-primary btn-outline-danger">{{ __('Tambah Data')}}</a>
+                <div class="card-body bg-white">
+                <a href="{!! route('pengumuman.create')!!}" class="btn btn-primary ">{{ __('Tambah Data')}}</a>
+                <a href="{!! route('kategori_pengumuman.index')!!}" class="btn btn-primary">{{ __('Lihat Kategori Pengumuman')}}</a>
+                <a href="{!! route('home')!!}" class="btn btn-info">{{ __('Home')}}</a>
+
                 <div class="col text-center">
-                <table class="table table-bordered">
-                    <thead class ="bg-success">
+                <br>
+                <table class="table table-bordered bg-white">
+                    <thead class ="bg-info">
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Judul</th>
@@ -30,9 +34,14 @@
                                 <td>{!! $item->users_id!!}</td>
                                 <td>{!! $item->kategori_pengumuman_id!!}</td>
                                 <td>
-                                <button class="btn btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-                                <a href="{!! route('pengumuman.show',[$item-> id]) !!}" button class="btn btn-success " >Lihat Detail</a>
+                                <a href="{!! route('pengumuman.show',[$item-> id]) !!}" button class="btn btn-sm btn-info" >Lihat Detail</a>
                                 
+                                <a href="{!! route('pengumuman.edit',[$item-> id]) !!}" button class="btn btn-sm btn-warning btn-info" >Edit</a>
+                             
+                                {!! Form::open(['route' => ['pengumuman.destroy', $item->id],'method' => 'delete']) !!}
+
+                                {!! Form::submit('Hapus', ['class'=>'btn  btn-sm btn-danger','onclick'=>"return confirm('Apakah Anda yakin menghapus data ini ?')"]); !!}
+                                {!! Form::close() !!}
                                 </td>
                             </tr>
                             @endforeach
